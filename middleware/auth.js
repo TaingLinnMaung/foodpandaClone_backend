@@ -23,17 +23,17 @@ export const isAuthenticated = CatchAsyncError(async (req,res,next) => {
 
         // const user = await redis.get(decoded.id)
         const user = await userModel.findById(decoded.id)
-
+        let userJsonString =JSON.stringify(user)
+        req.user = JSON.parse(userJsonString)
         if(!user) {
             return next(new ErrorHandler("user not found",400))
         }
-
-        req.user = JSON.parse(user)
+      
 
         next()
 
     } catch (error) {
-        
+        return next(new ErrorHandler(error.message,400))
     }
 })
 
@@ -41,6 +41,7 @@ export const isAuthenticated = CatchAsyncError(async (req,res,next) => {
 
 export const authorizeRoles = (...roles) => {
     return (req,res,next) => {
+        console.log(req.user)
         if(!roles.includes(req.user?.role || "")){
             return next(new ErrorHandler(`Role:${req.user?.role} is not allowed to access this resources`,403))
         }
