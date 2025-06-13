@@ -1,6 +1,6 @@
-# LMS Backend
+# FoodPandaClone Backend
 
-This is the backend for the Learning Management System (LMS) application. It is built using Node.js, Express, MongoDB, and Redis.
+This is the backend for foodpanda clone application. It is built using Node.js, Express, MongoDB.
 
 ## Table of Contents
 
@@ -35,7 +35,6 @@ The application requires the following environment variables to be set:
 - : The local IP address of the server.
 - `ORIGIN`: The allowed origins for CORS.
 - : The MongoDB connection URL.
-- : The Redis connection URL.
 - : The secret key for activation tokens.
 - : The secret key for refresh tokens.
 - : The secret key for access tokens.
