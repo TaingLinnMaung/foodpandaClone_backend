@@ -5,6 +5,7 @@ import cors from "cors"
 import {ErrorMiddleware} from "./middleware/error.js"
 import userRouter from "./routes/user.route.js"
 import restaurantRouter from "./routes/restaurant.route.js"
+import categoryRoute from "./routes/category.route.js"
 
 export const app = express()
 
@@ -26,6 +27,7 @@ app.use(cors())
 
 app.use("/api",userRouter)
 app.use("/api",restaurantRouter)
+app.use("/api",categoryRoute)
 
 //api
 app.get("/api/test",(req,res,next) => {

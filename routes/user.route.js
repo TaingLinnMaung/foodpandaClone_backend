@@ -1,25 +1,27 @@
 import express from "express"
-import { activateUser, getUserInfo, loginUser, logoutUser, registrationUser, socialAuth, updateAccessToken, updatePassword, updateUser } from "../controllers/user.controller.js"
+import * as userController from "../controllers/user.controller.js"
 import {  isAuthenticated } from "../middleware/auth.js"
 
 const userRouter = express.Router()
 
-userRouter.post('/auth/register',registrationUser)
+userRouter.get('/auth/users',userController.getAllUsers)
 
-userRouter.post('/auth/activate-user',activateUser)
+userRouter.post('/auth/register',userController.registrationUser)
 
-userRouter.post('/auth/login',loginUser)
+userRouter.post('/auth/activate-user',userController.activateUser)
 
-userRouter.post('/auth/social-auth',socialAuth)
+userRouter.post('/auth/login',userController.loginUser)
 
-userRouter.get('/auth/refreshtoken',updateAccessToken)
+userRouter.post('/auth/social-auth',userController.socialAuth)
 
-userRouter.get('/auth/logout',isAuthenticated,logoutUser)
+userRouter.get('/auth/refreshtoken',userController.updateAccessToken)
 
-userRouter.get('/auth/info',isAuthenticated,getUserInfo)
+userRouter.get('/auth/logout',isAuthenticated,userController.logoutUser)
 
-userRouter.put('/auth/update-info',isAuthenticated,updateUser)
+userRouter.get('/auth/info',isAuthenticated,userController.getUserInfo)
 
-userRouter.put('/auth/update-password',isAuthenticated,updatePassword)
+userRouter.put('/auth/update-info',isAuthenticated,userController.updateUser)
+
+userRouter.put('/auth/update-password',isAuthenticated,userController.updatePassword)
 
 export default userRouter

@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['user', 'admin'], // example statuses
-    default: "admin"
+    default: "user"
   },
   isVerified: {
     type: Boolean,

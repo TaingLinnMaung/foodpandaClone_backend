@@ -12,6 +12,10 @@ const RestaurantSchema = new Schema({
     type: String,  // URL or path to the logo image
     trim: true,
   },
+  logoPublic_id:{
+    type:String,
+    trim:true
+  },
   rating: {
     type: Number,
     min: 0,

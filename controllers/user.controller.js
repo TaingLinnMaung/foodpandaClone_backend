@@ -11,7 +11,7 @@ import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt
 import commonPasswords from "../staticData/commonPassword.js" 
 // import { redis } from "../config/redis.js";
 import { decode } from "punycode";
-import { getUserById } from "../services/user.service.js";
+import { getUserById  } from "../services/user.service.js";
 
 dotEnv.config();
 
@@ -63,7 +63,6 @@ export const registrationUser = CatchAsyncError(async (req, res, next) => {
   }
 });
 
-
 //create activation token
 export const createActivationToken = (user) => {
   const activationCode = Math.floor(1000 + Math.random() * 9000).toString();
@@ -76,7 +75,6 @@ export const createActivationToken = (user) => {
   );
   return { token, activationCode };
 };
-
 
 //activate user
 export const activateUser = CatchAsyncError(async (req,res,next) => {
@@ -112,7 +110,6 @@ export const activateUser = CatchAsyncError(async (req,res,next) => {
     }
 })
 
-
 //login user
 export const loginUser = CatchAsyncError(async (req,res,next) => {
     try {
@@ -139,7 +136,6 @@ export const loginUser = CatchAsyncError(async (req,res,next) => {
     }
 })
 
-
 //logout user
 export const logoutUser = CatchAsyncError(async (req,res,next) => {
     try {
@@ -154,7 +150,6 @@ export const logoutUser = CatchAsyncError(async (req,res,next) => {
         return next(new ErrorHandler(error.message,400))
     }
 })
-
 
 //update access token
 export const updateAccessToken = CatchAsyncError(async (req,res,next) =>{
@@ -199,7 +194,6 @@ export const updateAccessToken = CatchAsyncError(async (req,res,next) =>{
     }
 })
 
-
 ///get user info
 export const getUserInfo = CatchAsyncError(async (req,res,next) => {
     try {
@@ -211,6 +205,20 @@ export const getUserInfo = CatchAsyncError(async (req,res,next) => {
     }
 })
 
+//get all user
+export const getAllUsers = CatchAsyncError(async (req,res,next) => {
+    try {
+        let data = await userModel.find()
+       console.log(data)
+    
+        res.status(200).json({
+            status:'success',
+            data
+        })
+    } catch (error) {
+           return next(new ErrorHandler(error.message,400))
+    }
+})
 
 //social authh
 export const socialAuth = CatchAsyncError(async (req,res,next) => {
@@ -227,7 +235,6 @@ export const socialAuth = CatchAsyncError(async (req,res,next) => {
         return next(new ErrorHandler(error.message,400))
     }
 })
-
 
 //update user info
 export const updateUser = CatchAsyncError(async (req,res,next) => {
@@ -260,7 +267,6 @@ export const updateUser = CatchAsyncError(async (req,res,next) => {
         return next(new ErrorHandler(error.message,400))
     }
 })
-
 
 //update user password
 export const updatePassword = CatchAsyncError(async (req,res,next) => {
