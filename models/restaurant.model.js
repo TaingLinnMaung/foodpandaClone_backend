@@ -22,6 +22,12 @@ const RestaurantSchema = new Schema({
     max: 5,
     default: 0,
   },
+   categories: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+      },
+    ],
   address: {
     type: String,
     trim: true,

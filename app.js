@@ -6,6 +6,7 @@ import {ErrorMiddleware} from "./middleware/error.js"
 import userRouter from "./routes/user.route.js"
 import restaurantRouter from "./routes/restaurant.route.js"
 import categoryRoute from "./routes/category.route.js"
+import { sortFunction } from "./test.js"
 
 export const app = express()
 
@@ -30,12 +31,7 @@ app.use("/api",restaurantRouter)
 app.use("/api",categoryRoute)
 
 //api
-app.get("/api/test",(req,res,next) => {
-    res.status(200).json({
-        success:true,
-        message:"api is working"
-    })
-})
+app.get("/api/test",sortFunction)
 
 app.all("*",(req,res,next) => {
     const err = new Error(`Route ${req.originalUrl} is not Found! `)

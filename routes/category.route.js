@@ -5,6 +5,6 @@ const router = Router()
 
 router.get('/category/:id',categoryController.getCategoriesByRestaurantId)
 
-router.post('/category/create',categoryController.createCategoryByRestaurantId)
+router.post('/category/create',categoryController.createCategory)
 
 export default router;

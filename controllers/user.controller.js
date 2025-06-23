@@ -158,7 +158,8 @@ export const updateAccessToken = CatchAsyncError(async (req,res,next) =>{
         const decoded = jwt.verify(refresh_token,process.env.REFRESH_TOKEN)
 
         const message = `Could not refresh token`
-        if(!decode) {
+      
+        if(!decoded) {
             return next(new ErrorHandler(message,400))
         }
 
@@ -169,7 +170,7 @@ export const updateAccessToken = CatchAsyncError(async (req,res,next) =>{
             return next(new ErrorHandler(message,400)) 
         }
 
-        const user =  JSON.parse(session)
+        const user =  session
 
         const accessToken = jwt.sign({id:user._id},process.env.ACCESS_TOKEN,{
             expiresIn:"5m"

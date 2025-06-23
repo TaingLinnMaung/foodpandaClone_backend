@@ -8,11 +8,10 @@ const CategorySchema = new Schema({
     required: true,
     trim: true
   },
-  restaurant_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'Restaurant',
-    required: true
-  }
+  description: {
+      type: String,
+      trim: true,
+    },
 }, {
   timestamps: true
 });
