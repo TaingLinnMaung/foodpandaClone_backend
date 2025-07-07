@@ -98,3 +98,16 @@ export const getRestaurantById = CatchAsyncError(async (req,res,next) => {
     return next(new ErrorHandler(error.message,400))
   }
 })
+
+export const getRestaurantByCategory = CatchAsyncError(async (req,res,next) => {
+  try {
+    const {id} = req.params
+    let objectId = new mongoose.Types.ObjectId(id)
+
+    const data = await Restaurant.find({categories:objectId}).populate('categories')
+
+    res.status(200).json({success:true,data})
+  } catch (error) {
+    return next(new ErrorHandler(error.message,400))
+  }
+})

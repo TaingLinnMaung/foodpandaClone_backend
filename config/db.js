@@ -10,6 +10,9 @@ export const connectDB = async () => {
 		console.error("Error connecting to MONGODB: " + error.message);
 		// process.exit(1); // 1 means there was an error, 0 means success
 		setTimeout(connectDB,5000)
+	}finally{
+		let res = await fetch('http://192.168.110.125:5000/api/category/all')
+		
 	}
 };
 

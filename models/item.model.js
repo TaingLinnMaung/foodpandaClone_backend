@@ -13,6 +13,14 @@ const ItemSchema = new Schema({
     ref: 'Category',
     required: true,
   },
+    image: {
+    type: String,  // URL or path to the  image
+    trim: true,
+  },
+  imagePublic_id:{
+    type:String,
+    trim:true
+  },
   price: {
     type: Number,
     required: true,

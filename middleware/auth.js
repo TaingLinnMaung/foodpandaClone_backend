@@ -10,6 +10,7 @@ dotEnv.config()
 export const isAuthenticated = CatchAsyncError(async (req,res,next) => {
     try {
         const access_token = req.cookies.access_token
+        console.log(req.cookies)
        
         if(!access_token){
             return next(new ErrorHandler("Please Login To Access This Resources",400))

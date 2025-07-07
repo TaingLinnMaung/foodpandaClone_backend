@@ -10,8 +10,8 @@ export const getCategoriesByRestaurantId = CatchAsyncError(async (req,res,next) 
         const {id} = req.params
        
 const objectId = new mongoose.Types.ObjectId(id)
-        let data = await restaurantModel.findById(objectId).populate('categories')
-        res.status(200).json({success:true,data:data.categories})
+        let data = await restaurantModel.find(objectId).populate('categories')
+       return res.status(200).json({success:true,data:data[0].categories || [] })
         console.log('hello')
     } catch (error) {
         return next(new ErrorHandler(error.message,400))
@@ -23,10 +23,31 @@ export const createCategory = CatchAsyncError(async (req,res,next) => {
         const {title,description} = req.body
         let newCategory = await categoryModel.create({title,description})
 
-        res.status(201).json({success:true,data:newCategory})
+       return res.status(201).json({success:true,data:newCategory})
 
       
     } catch (error) {
         return next(new ErrorHandler(error.message,400))
+    }
+})
+
+export const getAllCategory = CatchAsyncError(async (req,res,next) => {
+    try {
+       
+        const data = await categoryModel.find()
+        res.status(200).json({success:true,data})
+    } catch (error) {
+        return next(new ErrorHandler(error.message,400))
+    }
+})
+
+export const deleteCategory = CatchAsyncError(async (req,res,next) => {
+    try {
+        let {id} = req.params
+        let objectId = new mongoose.Types.ObjectId(id)
+        const data = await categoryModel.findByIdAndDelete(objectId)
+        res.status(200).json({success:true,data})
+    } catch (error) {
+       return next(new ErrorHandler(error.message,400)) 
     }
 })

@@ -6,6 +6,7 @@ import {ErrorMiddleware} from "./middleware/error.js"
 import userRouter from "./routes/user.route.js"
 import restaurantRouter from "./routes/restaurant.route.js"
 import categoryRoute from "./routes/category.route.js"
+import itemRoute from "./routes/item.route.js"
 import { sortFunction } from "./test.js"
 
 export const app = express()
@@ -23,12 +24,16 @@ app.use(cookieParser())
 //     origin:process.env.ORIGIN
 // }))
 
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:5173", // frontend origin
+  credentials: true,               // allow cookies
+}));
 
 
 app.use("/api",userRouter)
 app.use("/api",restaurantRouter)
 app.use("/api",categoryRoute)
+app.use("/api",itemRoute)
 
 //api
 app.get("/api/test",sortFunction)
